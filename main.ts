@@ -12,6 +12,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 const line =
   "I run the city's largest last-mile fleet — 40 million pigeons, no salaries, paid in breadcrumbs. Seed round's open; the squirrels already invested.";
 
+// Runtime gate: the brief requires exactly one line of 1–200 characters.
+// Fail loudly rather than write an entry the grader would reject.
+if (line.length < 1 || line.length > 200 || line.includes("\n")) {
+  throw new Error(`Entry violates the 1–200 character gate (length ${line.length}).`);
+}
+
 const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 
 mkdirSync(outDir, { recursive: true });
